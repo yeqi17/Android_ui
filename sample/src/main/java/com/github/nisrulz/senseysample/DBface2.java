@@ -1,12 +1,16 @@
 package com.github.nisrulz.senseysample;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.github.nisrulz.sensey.Sensey;
+import com.github.nisrulz.sensey.TouchTypeDetector;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -20,7 +24,10 @@ public class DBface2 extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Init Sensey
+        Sensey.getInstance().init(this);
+        // Start Touch
+        startTouchTypeDetection();
         mRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
         mRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
         mRecyclerView.setAdapter(mAdapter);
@@ -33,13 +40,23 @@ public class DBface2 extends BaseActivity {
     }
 
     @Override
-    protected List<String> createDataList() {
-        List<String> dataList = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            dataList.add("第" + i + "个Item");
+    protected List<FaceRegistrant> createDataList() {
+        FaceRegistrant faceRegistrant;
+
+        List<FaceRegistrant> dataList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            faceRegistrant = new FaceRegistrant("yeqi",R.drawable.bg_people);
+            dataList.add(faceRegistrant);
         }
         return dataList;
     }
+    //List类型要对应List<FaceRegistrant>
+
+    @Override
+    protected BaseAdapter createAdapter() {
+        return new RegistrantFaceAdapter(this);
+    }
+
     private SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
         @Override
         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int position) {
@@ -105,4 +122,78 @@ public class DBface2 extends BaseActivity {
             }
         }
     };
+    //重写touch的操作
+    private void startTouchTypeDetection() {
+        Sensey.getInstance()
+                .startTouchTypeDetection(DBface2.this, new TouchTypeDetector.TouchTypListener() {
+                    @Override
+                    public void onDoubleTap() {
+                    }
+
+                    @Override
+                    public void onLongPress() {
+                    }
+
+                    @Override
+                    public void onScroll(int scrollDirection) {
+                        switch (scrollDirection) {
+                            case TouchTypeDetector.SCROLL_DIR_UP:
+                                //setResultTextView("Scrolling Up");
+                                Intent intent = new Intent(DBface2.this, enter_code.class);
+                                startActivity(intent);
+                                break;
+                            case TouchTypeDetector.SCROLL_DIR_DOWN:
+                                //setResultTextView("Scrolling Down");
+                                break;
+                            case TouchTypeDetector.SCROLL_DIR_LEFT:
+                                //setResultTextView("Scrolling Left");
+                                break;
+                            case TouchTypeDetector.SCROLL_DIR_RIGHT:
+                                //setResultTextView("Scrolling Right");
+                                break;
+                            default:
+                                // Do nothing
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onSingleTap() {
+                        //setResultTextView("Single Tap");
+                    }
+
+                    @Override
+                    public void onSwipe(int swipeDirection) {
+                        switch (swipeDirection) {
+                            case TouchTypeDetector.SWIPE_DIR_UP:
+                                //setResultTextView("Swipe Up");
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_DOWN:
+                                //setResultTextView("Swipe Down");
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_LEFT:
+                                //setResultTextView("Swipe Left");
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_RIGHT:
+                                //setResultTextView("Swipe Right");
+                                break;
+                            default:
+                                //do nothing
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onThreeFingerSingleTap() {
+                        //setResultTextView("Three Finger Tap");
+                    }
+
+                    @Override
+                    public void onTwoFingerSingleTap() {
+                        //setResultTextView("Two Finger Tap");
+                    }
+                });
+    }
+
+
 }

@@ -44,7 +44,8 @@
         <activity android:name=".enter_code" />
 <!--        <activity android:name=".DBface1" />
 -->
-        <activity android:name=".DBface2"></activity>
+
+        <!--<activity android:name=".DBface2"></activity>-->
     </application>
 
 </manifest>

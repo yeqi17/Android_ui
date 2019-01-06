@@ -1,12 +1,14 @@
 package com.github.nisrulz.senseysample;
 
-public class FaceRegistrant {
+public class FaceVisitor {
 
     private String name;
+    private String date;
     private int imageId;
 
-    public FaceRegistrant(String name, int imageId) {
+    public FaceVisitor(String name, String date, int imageId) {
         this.name = name;
+        this.date = date;
         this.imageId = imageId;
     }
 
@@ -18,6 +20,13 @@ public class FaceRegistrant {
         this.name = name;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getImageId() {
         return imageId;

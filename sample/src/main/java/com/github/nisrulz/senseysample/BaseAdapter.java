@@ -24,8 +24,10 @@ import java.util.List;
 /**
  * Created by YanZhenjie on 2017/10/3.
  */
-public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseAdapter<D,VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
+
+    protected List<D> mDataList;//需要显示的数据;
     private LayoutInflater mInflater;
 
     public BaseAdapter(Context context) {
@@ -36,6 +38,6 @@ public abstract class BaseAdapter<VH extends RecyclerView.ViewHolder> extends Re
         return mInflater;
     }
 
-    public abstract void notifyDataSetChanged(List<String> dataList);
+    public abstract void notifyDataSetChanged(List<D> dataList);
 
 }

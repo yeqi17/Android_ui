@@ -29,8 +29,6 @@ public class DBface1 extends BaseActivity {
         // Start Touch
         startTouchTypeDetection();
 
-
-
         mRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
         mRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
         mRecyclerView.setAdapter(mAdapter);
@@ -43,13 +41,22 @@ public class DBface1 extends BaseActivity {
     }
 
     @Override
-    protected List<String> createDataList() {
-        List<String> dataList = new ArrayList<>();
+    protected List<FaceVisitor> createDataList() {
+        FaceVisitor faceVisitor;
+
+        List<FaceVisitor> dataList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            dataList.add("第" + i + "个Item");
+            faceVisitor = new FaceVisitor("yeqi","2010.10.11",R.drawable.bg_people);
+            dataList.add(faceVisitor);
         }
         return dataList;
     }
+
+    @Override
+    protected BaseAdapter createAdapter() {
+        return new VisitorFaceAdapter(this);
+    }
+
     private SwipeMenuCreator swipeMenuCreator = new SwipeMenuCreator() {
         @Override
         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int position) {
@@ -125,6 +132,8 @@ public class DBface1 extends BaseActivity {
 
                   @Override
                   public void onLongPress() {
+                      Intent intent = new Intent(DBface1.this, DBface2.class);
+                      startActivity(intent);
                   }
 
                   @Override
@@ -132,8 +141,6 @@ public class DBface1 extends BaseActivity {
                       switch (scrollDirection) {
                           case TouchTypeDetector.SCROLL_DIR_UP:
                               //setResultTextView("Scrolling Up");
-                              Intent intent = new Intent(DBface1.this, enter_code.class);
-                              startActivity(intent);
                               break;
                           case TouchTypeDetector.SCROLL_DIR_DOWN:
                               //setResultTextView("Scrolling Down");
@@ -179,6 +186,8 @@ public class DBface1 extends BaseActivity {
                   @Override
                   public void onThreeFingerSingleTap() {
                       //setResultTextView("Three Finger Tap");
+                      Intent intent = new Intent(DBface1.this, DBface2.class);
+                      startActivity(intent);
                   }
 
                   @Override

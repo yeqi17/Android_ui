@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * Created by YanZhenjie on 2017/7/21.
  */
-public class BaseActivity extends AppCompatActivity implements SwipeItemClickListener {
+public abstract class BaseActivity<D> extends AppCompatActivity implements SwipeItemClickListener {
 
     protected Toolbar mToolbar;
     protected ActionBar mActionBar;
@@ -45,7 +45,7 @@ public class BaseActivity extends AppCompatActivity implements SwipeItemClickLis
     protected RecyclerView.ItemDecoration mItemDecoration;
 
     protected BaseAdapter mAdapter;
-    protected List<String> mDataList;
+    protected List<D> mDataList;//D抽象list
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,17 +84,9 @@ public class BaseActivity extends AppCompatActivity implements SwipeItemClickLis
         return new DefaultItemDecoration(ContextCompat.getColor(this, R.color.divider_color));
     }
 
-    protected List<String> createDataList() {
-        List<String> dataList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            dataList.add("第" + i + "个Item");
-        }
-        return dataList;
-    }
+    protected abstract List<D> createDataList();
 
-    protected BaseAdapter createAdapter() {
-        return new MainAdapter(this);
-    }
+    protected abstract BaseAdapter createAdapter();
 
     @Override
     public void onItemClick(View itemView, int position) {
