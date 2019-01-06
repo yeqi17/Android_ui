@@ -119,7 +119,7 @@ public class TouchActivity extends AppCompatActivity
                         switch (scrollDirection) {
                             case TouchTypeDetector.SCROLL_DIR_UP:
                                 //setResultTextView("Scrolling Up");
-                                Intent intent = new Intent(TouchActivity.this,enter_code.class);
+                                Intent intent = new Intent(TouchActivity.this,Login.class);
                                 startActivity(intent);
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_DOWN:

@@ -17,7 +17,8 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
-
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class DBface1 extends BaseActivity {
 
@@ -25,10 +26,11 @@ public class DBface1 extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init Sensey
-        Sensey.getInstance().init(this);
+        //Sensey.getInstance().init(this);
         // Start Touch
-        startTouchTypeDetection();
-
+        //startTouchTypeDetection();
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("访客");
         mRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
         mRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
         mRecyclerView.setAdapter(mAdapter);
@@ -122,80 +124,22 @@ public class DBface1 extends BaseActivity {
             }
         }
     };
-  //重写touch的操作
-  private void startTouchTypeDetection() {
-      Sensey.getInstance()
-              .startTouchTypeDetection(DBface1.this, new TouchTypeDetector.TouchTypListener() {
-                  @Override
-                  public void onDoubleTap() {
-                  }
-
-                  @Override
-                  public void onLongPress() {
-                      Intent intent = new Intent(DBface1.this, DBface2.class);
-                      startActivity(intent);
-                  }
-
-                  @Override
-                  public void onScroll(int scrollDirection) {
-                      switch (scrollDirection) {
-                          case TouchTypeDetector.SCROLL_DIR_UP:
-                              //setResultTextView("Scrolling Up");
-                              break;
-                          case TouchTypeDetector.SCROLL_DIR_DOWN:
-                              //setResultTextView("Scrolling Down");
-                              break;
-                          case TouchTypeDetector.SCROLL_DIR_LEFT:
-                              //setResultTextView("Scrolling Left");
-                              break;
-                          case TouchTypeDetector.SCROLL_DIR_RIGHT:
-                              //setResultTextView("Scrolling Right");
-                              break;
-                          default:
-                              // Do nothing
-                              break;
-                      }
-                  }
-
-                  @Override
-                  public void onSingleTap() {
-                      //setResultTextView("Single Tap");
-                  }
-
-                  @Override
-                  public void onSwipe(int swipeDirection) {
-                      switch (swipeDirection) {
-                          case TouchTypeDetector.SWIPE_DIR_UP:
-                              //setResultTextView("Swipe Up");
-                              break;
-                          case TouchTypeDetector.SWIPE_DIR_DOWN:
-                              //setResultTextView("Swipe Down");
-                              break;
-                          case TouchTypeDetector.SWIPE_DIR_LEFT:
-                              //setResultTextView("Swipe Left");
-                              break;
-                          case TouchTypeDetector.SWIPE_DIR_RIGHT:
-                              //setResultTextView("Swipe Right");
-                              break;
-                          default:
-                              //do nothing
-                              break;
-                      }
-                  }
-
-                  @Override
-                  public void onThreeFingerSingleTap() {
-                      //setResultTextView("Three Finger Tap");
-                      Intent intent = new Intent(DBface1.this, DBface2.class);
-                      startActivity(intent);
-                  }
-
-                  @Override
-                  public void onTwoFingerSingleTap() {
-                      //setResultTextView("Two Finger Tap");
-                  }
-              });
-  }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu:
+                Intent intent = new Intent(DBface1.this,DBface2.class);
+                startActivity(intent);
+                Toast.makeText(this, "访客目录", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+        }
+        return true;
+    }
 
 
 }

@@ -5,7 +5,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.nisrulz.senseysample.enter_code">
+    tools:context="com.github.nisrulz.senseysample.Login">
+    <!--todo 此处可能要修改!tools:context-->
 
     <ImageView
         android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingTop="15dp"
-                android:text="Signin"
+                android:text="@string/sign_in"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
@@ -65,7 +66,7 @@
                 android:gravity="center"
                 android:rotation="180"
                 android:paddingTop="15dp"
-                android:text="Signup"
+                android:text="@string/change_pw"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"

@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@null"
-        android:text="Signup"
+        android:text="@string/change_pw"
         android:textColor="#FFF"
         android:textSize="30sp" />
 </LinearLayout>

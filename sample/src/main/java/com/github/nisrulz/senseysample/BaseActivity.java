@@ -52,7 +52,8 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
         super.onCreate(savedInstanceState);
         setContentView(getContentView());
 
-        mToolbar = findViewById(R.id.toolbar);//此处加载toolbar,显示标题栏"sensey".
+        mToolbar = findViewById(R.id.toolbar);//此处加载toolbar,显示标题栏"".
+
 
         mRecyclerView = findViewById(R.id.recycler_view);
 

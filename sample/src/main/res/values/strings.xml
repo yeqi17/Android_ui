@@ -15,8 +15,8 @@
   -->
 
 <resources>
-    <string name="app_name">Sensey</string>
-
+    <string name="app_name">Havom</string>
+    <string name="visitor">Visitor</string>
     <string name="action_settings">Settings</string>
     <string name="shake_gesture">Shake Gesture</string>
     <string name="flip_gesture">Flip Gesture</string>
@@ -39,4 +39,9 @@
     <string name="step_detector">Step Detector</string>
     <string name="pickup_device_detector">Pickup Device Detector</string>
     <string name="scoop_detector">Scoop Detector</string>
+    <string name="sign_in">登入</string>
+    <string name="change_pw">改密</string>
+
+
+
 </resources>
