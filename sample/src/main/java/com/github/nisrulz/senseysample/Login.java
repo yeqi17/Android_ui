@@ -1,5 +1,7 @@
 package com.github.nisrulz.senseysample;
 
+import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.percent.PercentLayoutHelper;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.app.Activity;
+import android.widget.Toast;
 
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
@@ -27,6 +30,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private Button btnSignup;
     private Button btnSignin;
     LinearLayout llsignin,llsignup;
+
+    private TextInputLayout til_password;//登入
+    private TextInputLayout til_oldpassword;//change pw
+    private TextInputLayout til_newpassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +83,44 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         //加入enter跳转的方法
         //tvSignupInvoker.addTextChangedListener(new JumpTextWatcher(tvSignupInvoker,DBface1.class));
+        //btnSignup 登录跳转
+        til_password = findViewById(R.id.til_password);
+        btnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String account = til_account.getEditText().getText().toString();
+                String password = til_password.getEditText().getText().toString();
+//                til_account.setErrorEnabled(false);
+                til_password.setErrorEnabled(false);
+                //验证用户名和密码
+                if(validatePassword(password)){
+                    Toast.makeText(Login.this,"登录成功",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(Login.this,DBface1.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
+//修改密码模块
+        til_oldpassword = findViewById(R.id.til_oldpassword);
+        til_newpassword = findViewById(R.id.til_newpassword);
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //String account = til_account.getEditText().getText().toString();
+                String oldpassword = til_oldpassword.getEditText().getText().toString();
+                String newpassword = til_newpassword.getEditText().getText().toString();
+
+                til_oldpassword.setErrorEnabled(false);
+                til_newpassword.setErrorEnabled(false);
+                //验证用户名和密码
+                if(validatePassword(oldpassword)&&validatePassword(newpassword)){
+                    Toast.makeText(Login.this,"修改成功",Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(Login.this,DBface1.class);
+//                    startActivity(intent);
+                }
+            }
+        });
 
     }
 
@@ -240,6 +285,35 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         }
     }
 */
+    /**
+     * 验证密码
+     * @param password
+     * @return
+     */
+    private boolean validatePassword(String password) {
+//        if (StringUtils.isEmpty(password)) {
+//            showError(til_password,"密码不能为空");
+//            return false;
+//        }
 
+        if (password.length() < 6 || password.length() > 18) {
+            showError(til_password,"密码长度为6-18位");
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * 显示错误提示，并获取焦点
+     * @param textInputLayout
+     * @param error
+     */
+    private void showError(TextInputLayout textInputLayout,String error){
+        textInputLayout.setError(error);
+        textInputLayout.getEditText().setFocusable(true);
+        textInputLayout.getEditText().setFocusableInTouchMode(true);
+        textInputLayout.getEditText().requestFocus();
+    }
 
 }

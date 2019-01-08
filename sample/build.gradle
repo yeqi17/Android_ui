@@ -50,4 +50,7 @@ dependencies {
     // Module Dependency
     implementation project(':sensey')
     implementation 'com.yanzhenjie:recyclerview-swipe:1.2.0'
+//textinputlayoutActitity use it
+//    compile 'commons-lang:commons-lang:2.6'
+
 }
