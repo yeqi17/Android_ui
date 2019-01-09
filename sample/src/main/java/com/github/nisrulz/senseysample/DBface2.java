@@ -29,16 +29,17 @@ public class DBface2 extends BaseActivity {
         //设置toolbar 标题
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("已注册");
-        //设置toolbar的标题.todo 以后可能需要在restar里重设置标题.
+        //设置toolbar的标题.todo 以后可能需要在restart里重设置标题.
         mRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
         mRecyclerView.setSwipeMenuItemClickListener(mMenuItemClickListener);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged(mDataList);
     }
 
+    //此处显示返回home的按钮
     @Override
     protected boolean displayHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 
     @Override
@@ -63,12 +64,10 @@ public class DBface2 extends BaseActivity {
         @Override
         public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int position) {
             int width = getResources().getDimensionPixelSize(R.dimen.dp_70);
-
             // 1. MATCH_PARENT 自适应高度，保持和Item一样高;
             // 2. 指定具体的高，比如80;
             // 3. WRAP_CONTENT，自身高度，不推荐;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
-
             // 添加左侧的，如果不添加，则左侧不会出现菜单。
             {
                 SwipeMenuItem addItem = new SwipeMenuItem(DBface2.this).setBackground(R.drawable.selector_green)
@@ -131,9 +130,15 @@ public class DBface2 extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu:
-                Intent intent = new Intent(DBface2.this,DBface1.class);
+            case android.R.id.home:
+                Toast.makeText(this,"home",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DBface2.this,TouchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//关掉所要到的界面中间的activity,不保留TouchActivity的数据
                 startActivity(intent);
+                break;
+            case R.id.menu:
+                Intent intent2 = new Intent(DBface2.this,DBface1.class);
+                startActivity(intent2);
                 Toast.makeText(this, "Visitor Menu", Toast.LENGTH_SHORT).show();
                 break;
             default:

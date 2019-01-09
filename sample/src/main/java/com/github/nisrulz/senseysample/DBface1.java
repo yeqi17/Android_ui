@@ -35,7 +35,7 @@ public class DBface1 extends BaseActivity {
 
     @Override
     protected boolean displayHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 
     @Override
@@ -130,6 +130,11 @@ public class DBface1 extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            //此处不可用R.id.home.此坑慎入..
+            case android.R.id.home:
+                Toast.makeText(this,"home",Toast.LENGTH_SHORT).show();
+                finish();
+                break;
             case R.id.menu:
                 Intent intent = new Intent(DBface1.this,DBface2.class);
                 startActivity(intent);
