@@ -67,11 +67,17 @@ public class TouchActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         // *** IMPORTANT ***
         // Stop Sensey and release the context held by it
         Sensey.getInstance().stop();
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        startTouchTypeDetection();
+    }
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
