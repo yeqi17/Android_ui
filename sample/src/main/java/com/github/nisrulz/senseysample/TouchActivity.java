@@ -33,8 +33,7 @@ import com.github.nisrulz.sensey.TouchTypeDetector;
 /**
  * The type Touch activity.
  */
-public class TouchActivity extends AppCompatActivity
-         {
+public class TouchActivity extends AppCompatActivity {
 
     private static final String LOGTAG = "TouchActivity";
 
@@ -60,6 +59,7 @@ public class TouchActivity extends AppCompatActivity
         super.onPause();
         // Stop Detections
         Sensey.getInstance().stopTouchTypeDetection();
+        Sensey.getInstance().stop();
 //        Sensey.getInstance().stopPinchScaleDetection();
     }
 
@@ -77,6 +77,11 @@ public class TouchActivity extends AppCompatActivity
         startTouchTypeDetection();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Sensey.getInstance().init(this);
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {

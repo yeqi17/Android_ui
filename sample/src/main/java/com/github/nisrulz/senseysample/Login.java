@@ -255,7 +255,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_DOWN:
                                 Toast.makeText(Login.this,"up down",Toast.LENGTH_LONG).show();
-                                Intent intent2 = new Intent(Login.this,TouchActivity.class);
+                                Intent intent2 = new Intent(Login.this,DBface1.class);
                                 startActivity(intent2);
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_LEFT:
@@ -274,19 +274,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                     @Override
                     public void onSwipe(int swipeDirection) {
-//                        switch (swipeDirection) {
-//                            case TouchTypeDetector.SWIPE_DIR_UP:
-//                                break;
-//                            case TouchTypeDetector.SWIPE_DIR_DOWN:
-//                                break;
-//                            case TouchTypeDetector.SWIPE_DIR_LEFT:
-//                                break;
-//                            case TouchTypeDetector.SWIPE_DIR_RIGHT:
-//                                break;
-//                            default:
-//                                //do nothing
-//                                break;
-//                        }
+                        switch (swipeDirection) {
+                            case TouchTypeDetector.SWIPE_DIR_UP:
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_DOWN:
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_LEFT:
+                                break;
+                            case TouchTypeDetector.SWIPE_DIR_RIGHT:
+                                break;
+                            default:
+                                //do nothing
+                                break;
+                        }
                     }
 
                     @Override

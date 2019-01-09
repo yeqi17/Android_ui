@@ -23,22 +23,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Login">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!--<activity android:name=".TouchActivity">-->
+        <!--<activity android:name=".Login">-->
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         <!--</activity>-->
 
+        <activity android:name=".TouchActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <!--<activity android:name=".TouchActivity" ></activity>-->
-        <!--<activity android:name=".Login" ></activity>-->
+        <activity android:name=".Login" ></activity>
         <activity android:name=".DBface1"></activity>
         <activity android:name=".DBface2"></activity>
     </application>
