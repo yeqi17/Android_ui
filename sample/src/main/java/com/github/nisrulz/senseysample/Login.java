@@ -44,10 +44,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Init Sensey
-        Sensey.getInstance().init(Login.this);
+        Sensey.getInstance().init(this);
         // Start Touch 直接崩溃掉,为啥呢?
-        //重写一个函数,解决设定login为主页面的手势操作的加载问题.但是touch(First)到login还是直接崩掉?
-        //
+        //重写一个函数,解决设定login为主页面的手势操作的加载问题.但是touch()到login还是直接崩掉?
         startTouchTypeDetection();
 
         setContentView(R.layout.activity_enter_code);
@@ -93,7 +92,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         });
 
         //btnSignup button登录跳转
-        //todo 登入之后要对login活动进行销毁.
+        //登入之后要对login活动进行销毁.finish().
         til_password = findViewById(R.id.til_password);
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,12 +199,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 //            showError(til_password,"密码不能为空");
 //            return false;
 //        }
-
         if (password.length() < 6 || password.length() > 18) {
             showError(til_password,"密码长度为6-18位");
             return false;
         }
-
         return true;
     }
 
@@ -239,36 +236,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         // Setup onTouchEvent for detecting type of touch gesture
-        Sensey.getInstance().setupDispatchTouchEvent(event);
+//        Sensey.getInstance().setupDispatchTouchEvent(event);
         return super.dispatchTouchEvent(event);
     }
     private void startTouchTypeDetection() {
         Sensey.getInstance()
-                .startTouchTypeDetection(this, new TouchTypeDetector.TouchTypListener() {
+                .startTouchTypeDetection(Login.this, new TouchTypeDetector.TouchTypListener() {
                     @Override
                     public void onDoubleTap() {
-//                        setResultTextView("Double Tap");
                     }
                     @Override
                     public void onLongPress() {
-//                        setResultTextView("Long press");
                     }
                     @Override
                     public void onScroll(int scrollDirection) {
                         switch (scrollDirection) {
                             case TouchTypeDetector.SCROLL_DIR_UP:
-                                //setResultTextView("Scrolling Up");
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_DOWN:
-//                                setResultTextView("Scrolling Down");
-                                Intent intent = new Intent(Login.this,DBface1.class);
-                                startActivity(intent);
+                                Toast.makeText(Login.this,"up down",Toast.LENGTH_LONG).show();
+                                Intent intent2 = new Intent(Login.this,TouchActivity.class);
+                                startActivity(intent2);
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_LEFT:
-//                                setResultTextView("Scrolling Left");
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_RIGHT:
-//                                setResultTextView("Scrolling Right");
                                 break;
                             default:
                                 // Do nothing
@@ -278,37 +270,30 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                     @Override
                     public void onSingleTap() {
-//                        setResultTextView("Single Tap");
                     }
 
                     @Override
                     public void onSwipe(int swipeDirection) {
-                        switch (swipeDirection) {
-                            case TouchTypeDetector.SWIPE_DIR_UP:
-//                                setResultTextView("Swipe Up");
-                                break;
-                            case TouchTypeDetector.SWIPE_DIR_DOWN:
-//                                setResultTextView("Swipe Down");
-                                break;
-                            case TouchTypeDetector.SWIPE_DIR_LEFT:
-//                                setResultTextView("Swipe Left");
-                                break;
-                            case TouchTypeDetector.SWIPE_DIR_RIGHT:
-//                                setResultTextView("Swipe Right");
-                                break;
-                            default:
-                                //do nothing
-                                break;
-                        }
+//                        switch (swipeDirection) {
+//                            case TouchTypeDetector.SWIPE_DIR_UP:
+//                                break;
+//                            case TouchTypeDetector.SWIPE_DIR_DOWN:
+//                                break;
+//                            case TouchTypeDetector.SWIPE_DIR_LEFT:
+//                                break;
+//                            case TouchTypeDetector.SWIPE_DIR_RIGHT:
+//                                break;
+//                            default:
+//                                //do nothing
+//                                break;
+//                        }
                     }
 
                     @Override
                     public void onThreeFingerSingleTap() {
-//                        setResultTextView("Three Finger Tap");
                     }
                     @Override
                     public void onTwoFingerSingleTap() {
-//                        setResultTextView("Two Finger Tap");
                     }
                 });
     }

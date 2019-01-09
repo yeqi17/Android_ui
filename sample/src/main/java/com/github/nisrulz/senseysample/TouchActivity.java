@@ -58,7 +58,6 @@ public class TouchActivity extends AppCompatActivity
     @Override
     protected void onPause() {
         super.onPause();
-
         // Stop Detections
         Sensey.getInstance().stopTouchTypeDetection();
 //        Sensey.getInstance().stopPinchScaleDetection();
@@ -153,7 +152,6 @@ public class TouchActivity extends AppCompatActivity
                         switch (swipeDirection) {
                             case TouchTypeDetector.SWIPE_DIR_UP:
                                 setResultTextView("Swipe Up");
-
                                 break;
                             case TouchTypeDetector.SWIPE_DIR_DOWN:
                                 setResultTextView("Swipe Down");
