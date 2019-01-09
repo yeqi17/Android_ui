@@ -7,4 +7,10 @@
         android:title="menu"
         app:showAsAction="always"/>
 
+    <!--<item-->
+        <!--android:id="@+id/home"-->
+        <!--android:icon="@mipmap/ic_action_home"-->
+        <!--android:title="close"-->
+        <!--app:showAsAction="always"/>-->
+
 </menu>

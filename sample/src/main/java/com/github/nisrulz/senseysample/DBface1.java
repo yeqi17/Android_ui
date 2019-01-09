@@ -25,10 +25,6 @@ public class DBface1 extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Init Sensey
-        //Sensey.getInstance().init(this);
-        // Start Touch
-        //startTouchTypeDetection();
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("访客");
         mRecyclerView.setSwipeMenuCreator(swipeMenuCreator);
@@ -124,10 +120,13 @@ public class DBface1 extends BaseActivity {
             }
         }
     };
+
+    //add menu button
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
+    //add menu button
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -81,9 +81,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
-        //加入enter跳转的方法
-        //tvSignupInvoker.addTextChangedListener(new JumpTextWatcher(tvSignupInvoker,DBface1.class));
-        //btnSignup 登录跳转
+        //btnSignup button登录跳转
+        //todo 登入之后要对login活动进行销毁.
         til_password = findViewById(R.id.til_password);
         btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +94,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 //验证用户名和密码
                 if(validatePassword(password)){
                     Toast.makeText(Login.this,"登录成功",Toast.LENGTH_LONG).show();
+                    finish();//如果登录成功销毁登入页面.
                     Intent intent = new Intent(Login.this,DBface1.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//关掉所要到的界面中间的activity
                     startActivity(intent);
                 }
             }

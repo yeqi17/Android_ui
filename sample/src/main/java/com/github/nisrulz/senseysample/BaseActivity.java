@@ -54,14 +54,23 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
 
         mToolbar = findViewById(R.id.toolbar);//此处加载toolbar,显示标题栏"".
 
-
         mRecyclerView = findViewById(R.id.recycler_view);
 
         setSupportActionBar(mToolbar);
         mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        /*
         if (displayHomeAsUpEnabled()) {
             mActionBar.setDisplayHomeAsUpEnabled(true);
         }
+        */
+
 
         mLayoutManager = createLayoutManager();
         mItemDecoration = createItemDecoration();
@@ -102,8 +111,11 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+            //此处应该
+//            return true;
         }
         return true;
+//        return super.onOptionsItemSelected(item);
     }
 
 }
