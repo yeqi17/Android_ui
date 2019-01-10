@@ -15,7 +15,9 @@
  */
 package com.github.nisrulz.senseysample;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -23,15 +25,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.widget.DefaultItemDecoration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -93,6 +96,8 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
     @Override
     public void onItemClick(View itemView, int position) {
         Toast.makeText(this, "第" + position + "个", Toast.LENGTH_SHORT).show();
+//        InputMethodManager methodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//        methodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
     }
 
     protected boolean displayHomeAsUpEnabled() {
@@ -108,14 +113,54 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
         return true;
     }
 
-//    public void onClick(View v) {
-//        if(v.getId() == R.id. || v.getId() ==R.id.llSignup){
-//            // Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-//            InputMethodManager methodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-//            //InputMethodManager:软键盘布局
-//            methodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
-//        }
-//
-//    }
+//点击空白区域收回软键盘
+@Override
+public boolean dispatchTouchEvent(MotionEvent ev) {
+    if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+        View v = getCurrentFocus();
+        if (isShouldHideKeyboard(v, ev)) {
+            hideKeyboard(v.getWindowToken());
+        }
+    }
+    return super.dispatchTouchEvent(ev);
+}
+
+    /**
+     * 根据EditText所在坐标和用户点击的坐标相对比，来判断是否隐藏键盘，因为当用户点击EditText时则不能隐藏
+     *
+     * @param v
+     * @param event
+     * @return
+     */
+    private boolean isShouldHideKeyboard(View v, MotionEvent event) {
+        if (v != null && (v instanceof EditText)) {
+            int[] l = {0, 0};
+            v.getLocationInWindow(l);
+            int left = l[0],
+                    top = l[1],
+                    bottom = top + v.getHeight(),
+                    right = left + v.getWidth();
+            if (event.getX() > left && event.getX() < right
+                    && event.getY() > top && event.getY() < bottom) {
+                // 点击EditText的事件，忽略它。
+                return false;
+            } else {
+                return true;
+            }
+        }
+        // 如果焦点不是EditText则忽略，这个发生在视图刚绘制完，第一个焦点不在EditText上，和用户用轨迹球选择其他的焦点
+        return false;
+    }
+
+    /**
+     * 获取InputMethodManager，隐藏软键盘
+     * @param token
+     */
+    private void hideKeyboard(IBinder token) {
+        if (token != null) {
+            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            im.hideSoftInputFromWindow(token, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 
 }

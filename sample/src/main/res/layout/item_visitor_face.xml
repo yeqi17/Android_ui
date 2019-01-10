@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llVisitor"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp" >
+    android:layout_margin="5dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/visitor_image"
         android:layout_width="50dp"
         android:layout_height="50dp" />
 
-    <EditText
-        android:id="@+id/visitor_name"
-        android:layout_width="75dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dp" />
-
     <TextView
         android:id="@+id/visitor_date"
         android:layout_width="103dp"
         android:layout_height="42dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:id="@+id/visitor_name"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="10dp" />
 

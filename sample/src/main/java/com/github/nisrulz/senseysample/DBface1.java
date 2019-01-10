@@ -9,8 +9,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.nisrulz.sensey.Sensey;
-import com.github.nisrulz.sensey.TouchTypeDetector;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -19,6 +17,7 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+
 
 public class DBface1 extends BaseActivity {
 
@@ -144,8 +143,5 @@ public class DBface1 extends BaseActivity {
         }
         return true;
     }
-
-
-
 
 }
