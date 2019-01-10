@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,11 +34,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private LinearLayout llSignin;
     private Button btnSignup;
     private Button btnSignin;
+    private ImageButton btBack;
     LinearLayout llsignin,llsignup;
 
     private TextInputLayout til_password;//登入
     private TextInputLayout til_oldpassword;//change pw
     private TextInputLayout til_newpassword;
+
 
 
     @Override
@@ -47,9 +50,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Sensey.getInstance().init(this);
         // Start Touch 直接崩溃掉,为啥呢?
         //重写一个函数,解决设定login为主页面的手势操作的加载问题.但是touch()到login还是直接崩掉?
-        startTouchTypeDetection();
+        //startTouchTypeDetection();
 
         setContentView(R.layout.activity_enter_code);
+
 
         llSignin = (LinearLayout) findViewById(R.id.llSignin);
         llSignin.setOnClickListener(this);
@@ -61,6 +65,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         btnSignup= (Button) findViewById(R.id.btnSignup);
         btnSignin= (Button) findViewById(R.id.btnSignin);
+        btBack= findViewById(R.id.imageButton2);//返回button
 
         llSignup = (LinearLayout) findViewById(R.id.llSignup);
         llSignin = (LinearLayout) findViewById(R.id.llSignin);
@@ -112,6 +117,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             }
         });
 
+        //返回button
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();//如果登录成功销毁登入页面.
+            }
+        });
+
 //修改密码模块
         til_oldpassword = findViewById(R.id.til_oldpassword);
         til_newpassword = findViewById(R.id.til_newpassword);
@@ -132,6 +145,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 }
             }
         });
+
 
     }
 

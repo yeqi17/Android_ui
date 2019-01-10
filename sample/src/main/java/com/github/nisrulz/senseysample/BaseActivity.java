@@ -24,6 +24,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
@@ -106,5 +107,15 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
         }
         return true;
     }
+
+//    public void onClick(View v) {
+//        if(v.getId() == R.id. || v.getId() ==R.id.llSignup){
+//            // Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+//            InputMethodManager methodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+//            //InputMethodManager:软键盘布局
+//            methodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+//        }
+//
+//    }
 
 }
