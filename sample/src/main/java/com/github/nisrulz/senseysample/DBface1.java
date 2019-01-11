@@ -132,12 +132,14 @@ public class DBface1 extends BaseActivity {
             //此处不可用R.id.home.此坑慎入..
             case android.R.id.home:
                 Toast.makeText(this,"home",Toast.LENGTH_SHORT).show();
-                finish();
+                Intent intent = new Intent(DBface1.this,TouchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//关掉所要到的界面中间的activity,不保留TouchActivity的数据
+                startActivity(intent);
                 break;
             case R.id.menu:
-                Intent intent = new Intent(DBface1.this,DBface2.class);
-                startActivity(intent);
-                Toast.makeText(this, "访客目录", Toast.LENGTH_SHORT).show();
+                Intent intent2 = new Intent(DBface1.this,DBface2.class);
+                startActivity(intent2);
+                Toast.makeText(this, "注册用户", Toast.LENGTH_SHORT).show();
                 break;
             default:
         }

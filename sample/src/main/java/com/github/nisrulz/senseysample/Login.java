@@ -15,10 +15,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-//import android.view.MotionEvent;
-//import com.github.nisrulz.sensey.Sensey;
-//import com.github.nisrulz.sensey.PinchScaleDetector;
-//import com.github.nisrulz.sensey.TouchTypeDetector;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,18 +31,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private TextInputLayout til_password;//登入
     private TextInputLayout til_oldpassword;//change pw
     private TextInputLayout til_newpassword;
-
+    static private String log_in = "666666";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Init Sensey
-//        Sensey.getInstance().init(this);
-        // Start Touch 直接崩溃掉?
-        //重写一个函数,解决设定login为主页面的手势操作的加载问题.但是touch()到login还是直接崩掉?
-        //startTouchTypeDetection();
-
         setContentView(R.layout.activity_enter_code);
         llSignin = (LinearLayout) findViewById(R.id.llSignin);
         llSignin.setOnClickListener(this);
@@ -100,7 +90,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 //                til_account.setErrorEnabled(false);
                 til_password.setErrorEnabled(false);
                 //验证用户名和密码
-                if(validatePassword(password)){
+                if(validatePasswordLength(password)){
                     Toast.makeText(Login.this,"登录成功",Toast.LENGTH_LONG).show();
                     finish();//如果登录成功销毁登入页面.
                     Intent intent = new Intent(Login.this,DBface1.class);
@@ -131,11 +121,17 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 til_oldpassword.setErrorEnabled(false);
                 til_newpassword.setErrorEnabled(false);
                 //验证用户名和密码
-                if(validatePassword(oldpassword)&&validatePassword(newpassword)){
-                    Toast.makeText(Login.this,"修改成功",Toast.LENGTH_LONG).show();
-//                    Intent intent = new Intent(Login.this,DBface1.class);
-//                    startActivity(intent);
+                if(!(validatePasswordLength(oldpassword) || validatePasswordLength(newpassword))){
+                    Toast.makeText(Login.this,"密码长度为6-8位",Toast.LENGTH_LONG).show();
                 }
+                else if(!validatePasswordCorrect(oldpassword)){
+                    showError(til_oldpassword, "旧密码错误");
+                    }
+                    else{
+                    log_in = newpassword;
+                    Toast.makeText(Login.this,"修改成功",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -200,18 +196,24 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
      * @param password
      * @return
      */
-    private boolean validatePassword(String password) {
+    private boolean validatePasswordLength(String password) {
 //        if (StringUtils.isEmpty(password)) {
 //            showError(til_password,"密码不能为空");
 //            return false;
 //        }
-        if (password.length() < 6 || password.length() > 18) {
-            showError(til_password,"密码长度为6-18位");
+        if (password.length() < 6 || password.length() > 8) {
+            showError(til_password,"密码长度为6-8位");
             return false;
         }
-        return true;
+        return validatePasswordCorrect(password);
     }
 
+    private boolean validatePasswordCorrect(String password){
+        if(!password.equals(log_in))
+            return false;
+        else
+            return true;
+    }
     /**
      * 显示错误提示，并获取焦点
      * @param textInputLayout

@@ -51,6 +51,7 @@ public abstract class BaseActivity<D> extends AppCompatActivity implements Swipe
     protected BaseAdapter mAdapter;
     protected List<D> mDataList;//D抽象list
 
+    protected String log_in = "666666";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

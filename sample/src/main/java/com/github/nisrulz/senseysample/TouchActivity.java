@@ -35,11 +35,11 @@ import com.github.nisrulz.sensey.TouchTypeDetector;
  */
 public class TouchActivity extends AppCompatActivity {
 
-    private static final String LOGTAG = "TouchActivity";
+//    private static final String LOGTAG = "TouchActivity";
 
     private static final boolean DEBUG = true;
 
-    private TextView txtResult;
+//    private TextView txtResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class TouchActivity extends AppCompatActivity {
         // Init Sensey
         Sensey.getInstance().init(this);
 
-        txtResult = (TextView) findViewById(R.id.textView_result);
+//        txtResult = (TextView) findViewById(R.id.textView_result);
         // Start Touch
         startTouchTypeDetection();
     }
@@ -90,25 +90,25 @@ public class TouchActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(event);
     }
 
-    private void resetResultInView(final TextView txt) {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                txt.setText(getString(R.string.results_show_here));
-            }
-        }, 3000);
-    }
+//    private void resetResultInView(final TextView txt) {
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                txt.setText(getString(R.string.results_show_here));
+//            }
+//        }, 3000);
+//    }
 
-    private void setResultTextView(String text) {
-        if (txtResult != null) {
-            txtResult.setText(text);
-            resetResultInView(txtResult);
-            if (DEBUG) {
-                Log.i(     LOGTAG, text);
-            }
-        }
-    }
+//    private void setResultTextView(String text) {
+//        if (txtResult != null) {
+//            txtResult.setText(text);
+//            resetResultInView(txtResult);
+//            if (DEBUG) {
+//                Log.i(     LOGTAG, text);
+//            }
+//        }
+//    }
 
 
     private void startTouchTypeDetection() {
@@ -116,12 +116,12 @@ public class TouchActivity extends AppCompatActivity {
                 .startTouchTypeDetection(TouchActivity.this, new TouchTypeDetector.TouchTypListener() {
                     @Override
                     public void onDoubleTap() {
-                        setResultTextView("Double Tap");
+//                        setResultTextView("Double Tap");
                     }
 
                     @Override
                     public void onLongPress() {
-                        setResultTextView("Long press");
+//                        setResultTextView("Long press");
                     }
 
                     @Override
@@ -133,13 +133,13 @@ public class TouchActivity extends AppCompatActivity {
                                 startActivity(intent);
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_DOWN:
-                                setResultTextView("Scrolling Down");
+//                                setResultTextView("Scrolling Down");
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_LEFT:
-                                setResultTextView("Scrolling Left");
+//                                setResultTextView("Scrolling Left");
                                 break;
                             case TouchTypeDetector.SCROLL_DIR_RIGHT:
-                                setResultTextView("Scrolling Right");
+//                                setResultTextView("Scrolling Right");
                                 break;
                             default:
                                 // Do nothing
@@ -149,23 +149,23 @@ public class TouchActivity extends AppCompatActivity {
 
                     @Override
                     public void onSingleTap() {
-                        setResultTextView("Single Tap");
+//                        setResultTextView("Single Tap");
                     }
 
                     @Override
                     public void onSwipe(int swipeDirection) {
                         switch (swipeDirection) {
                             case TouchTypeDetector.SWIPE_DIR_UP:
-                                setResultTextView("Swipe Up");
+//                                setResultTextView("Swipe Up");
                                 break;
                             case TouchTypeDetector.SWIPE_DIR_DOWN:
-                                setResultTextView("Swipe Down");
+//                                setResultTextView("Swipe Down");
                                 break;
                             case TouchTypeDetector.SWIPE_DIR_LEFT:
-                                setResultTextView("Swipe Left");
+//                                setResultTextView("Swipe Left");
                                 break;
                             case TouchTypeDetector.SWIPE_DIR_RIGHT:
-                                setResultTextView("Swipe Right");
+//                                setResultTextView("Swipe Right");
                                 break;
                             default:
                                 //do nothing
@@ -175,12 +175,12 @@ public class TouchActivity extends AppCompatActivity {
 
                     @Override
                     public void onThreeFingerSingleTap() {
-                        setResultTextView("Three Finger Tap");
+//                        setResultTextView("Three Finger Tap");
                     }
 
                     @Override
                     public void onTwoFingerSingleTap() {
-                        setResultTextView("Two Finger Tap");
+//                        setResultTextView("Two Finger Tap");
                     }
                 });
     }

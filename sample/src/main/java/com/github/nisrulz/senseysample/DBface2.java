@@ -139,7 +139,7 @@ public class DBface2 extends BaseActivity {
             case R.id.menu:
                 Intent intent2 = new Intent(DBface2.this,DBface1.class);
                 startActivity(intent2);
-                Toast.makeText(this, "Visitor Menu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "访客列表", Toast.LENGTH_SHORT).show();
                 break;
             default:
         }
